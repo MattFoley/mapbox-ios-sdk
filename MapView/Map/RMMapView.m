@@ -1903,9 +1903,11 @@
 
 - (UIImage *)takeSnapshotAndIncludeOverlay:(BOOL)includeOverlay
 {
+    [_attributionButton setHidden:YES];
+    
     _overlayView.hidden = !includeOverlay;
 
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, [[UIScreen mainScreen] scale]);
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, [[UIScreen mainScreen] scale]);
 
     for (RMMapTiledLayerView *tiledLayerView in _tiledLayersSuperview.subviews)
         tiledLayerView.useSnapshotRenderer = YES;
@@ -1920,7 +1922,7 @@
     UIGraphicsEndImageContext();
 
     _overlayView.hidden = NO;
-
+    [_attributionButton setHidden:NO];
     return image;
 }
 
