@@ -3481,7 +3481,7 @@
                                               _attributionButton.bounds.size.width,
                                               _attributionButton.bounds.size.height);
 
-        [self addSubview:_attributionButton];
+        //[self addSubview:_attributionButton];
     }
     else if ( ! _viewControllerPresentingAttribution && _attributionButton)
     {

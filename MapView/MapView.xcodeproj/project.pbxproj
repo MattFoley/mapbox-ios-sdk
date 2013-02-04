@@ -88,7 +88,7 @@
 		DD1985C1165C5F6400DF667F /* RMTileMillSource.h in Headers */ = {isa = PBXBuildFile; fileRef = DD1985BF165C5F6400DF667F /* RMTileMillSource.h */; };
 		DD1985C2165C5F6400DF667F /* RMTileMillSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1985C0165C5F6400DF667F /* RMTileMillSource.m */; };
 		DD1E3C6E161F954F004FC649 /* SMCalloutView.h in Headers */ = {isa = PBXBuildFile; fileRef = DD1E3C6C161F954F004FC649 /* SMCalloutView.h */; };
-		DD1E3C6F161F954F004FC649 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1E3C6D161F954F004FC649 /* SMCalloutView.m */; };
+		DD1E3C6F161F954F004FC649 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1E3C6D161F954F004FC649 /* SMCalloutView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		DD2B374514CF8041008DE8CB /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = DD2B373F14CF8041008DE8CB /* FMDatabase.h */; };
 		DD2B374614CF8041008DE8CB /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DD2B374014CF8041008DE8CB /* FMDatabase.m */; };
 		DD2B374714CF8041008DE8CB /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = DD2B374114CF8041008DE8CB /* FMDatabaseAdditions.h */; };
