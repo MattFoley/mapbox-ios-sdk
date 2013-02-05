@@ -56,6 +56,9 @@ typedef enum : NSUInteger {
 *   @return The annotation layer to display for the specified annotation or `nil` if you do not want to display a layer. */
 - (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation;
 
+//This is custom for SMCallout custom view branch.
+- (UIView *)contentViewForCallout:(RMAnnotation*)annotation;
+
 /** Tells the delegate that the visible layer for an annotation is about to be hidden from view due to scrolling or zooming the map.
 *   @param mapView The map view whose annotation alyer will be hidden.
 *   @param annotation The annotation whose layer will be hidden. */

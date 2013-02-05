@@ -1805,6 +1805,10 @@
     [self correctPositionOfAllAnnotations];
 
     anAnnotation.layer.zPosition = _currentCallout.layer.zPosition = MAXFLOAT;
+    
+    if ([self.delegate respondsToSelector:@selector(contentViewForCallout:)]) {
+        [_currentCallout setContentView:[self.delegate contentViewForCallout:anAnnotation]];
+    }
 
     [_currentCallout presentCalloutFromRect:anAnnotation.layer.bounds
                                     inLayer:anAnnotation.layer
