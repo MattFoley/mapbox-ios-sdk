@@ -133,7 +133,6 @@
     
     [urlToReturn appendFormat:@".png"];
     
-    NSLog(@"%@", urlToReturn);
 	return [NSURL URLWithString:urlToReturn];
 }
 
@@ -160,7 +159,6 @@
         
         [urlToReturn appendFormat:@".png"];
         [urls addObject:[NSURL URLWithString:urlToReturn]];
-        NSLog(@"%@", urlToReturn);
     }
     return urls;
 }
