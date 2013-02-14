@@ -52,6 +52,7 @@
 #import "RMAttributionViewController.h"
 
 #import "SMCalloutView.h"
+#import "WeakReference.h"
 
 #pragma mark --- begin constants ----
 
@@ -213,6 +214,7 @@
 @synthesize hideAttribution = _hideAttribution;
 @synthesize showLogoBug = _showLogoBug;
 
+
 #pragma mark -
 #pragma mark Initialization
 
@@ -309,6 +311,12 @@
                                                object:nil];
 
     RMLog(@"Map initialised. tileSource:%@, minZoom:%f, maxZoom:%f, zoom:%f at {%f,%f}", newTilesource, self.minZoom, self.maxZoom, self.zoom, initialCenterCoordinate.longitude, initialCenterCoordinate.latitude);
+    
+    _elementsToHideDuringSimplify = [@[]mutableCopy];
+    _shouldSimplifyViewOnScroll = YES;
+    _isSimplifying = NO;
+    _isUnsimplifying = NO;
+    _isCurrentlySimplified = NO;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -441,6 +449,7 @@
     [_attributionButton release]; _attributionButton = nil;
     [_logoBug release]; _logoBug = nil;
     [super dealloc];
+    NSLog(@"MapView Dealloc'd");
 }
 
 - (void)didReceiveMemoryWarning
@@ -1268,6 +1277,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    [self simplifyView];
     [self registerMoveEventByUser:YES];
 
     if (self.userTrackingMode != RMUserTrackingModeNone)
@@ -1298,6 +1308,8 @@
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
 {
+    [self simplifyView];
+    
     [self registerZoomEventByUser:(scrollView.pinchGestureRecognizer.state == UIGestureRecognizerStateBegan)];
 
     _mapScrollViewIsZooming = YES;
@@ -1519,6 +1531,10 @@
 {
     if (_delegateHasSingleTapOnMap)
         [_delegate singleTapOnMap:self at:aPoint];
+    
+
+    [self unsimplifyView];
+
 }
 
 - (void)handleSingleTap:(UIGestureRecognizer *)recognizer
@@ -3503,6 +3519,91 @@
         attributionViewController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
         
         [_viewControllerPresentingAttribution presentModalViewController:attributionViewController animated:YES];
+    }
+}
+
+- (void)addViewToHideForSimplify:(UIView*)viewToHide
+{
+    if ([viewToHide isKindOfClass:[UIView class]]) {
+        WeakReference *weakToAdd = [WeakReference weakReferenceWithObject:viewToHide];
+        [self.elementsToHideDuringSimplify addObject:weakToAdd];
+    }
+}
+
+- (void)removeViewToHideForSimplify:(UIView*)viewToHide
+{
+    [self.elementsToHideDuringSimplify removeObject:[WeakReference weakReferenceWithObject:viewToHide]];
+}
+
+- (void)addViewsToHideForSimplify:(NSArray*)viewsToHide
+{
+    for (UIView *view in viewsToHide) {
+        if ([view isKindOfClass:[UIView class]]) {
+            WeakReference *weakToAdd = [WeakReference weakReferenceWithObject:view];
+            [self.elementsToHideDuringSimplify addObject:weakToAdd];
+        }
+    }
+}
+
+- (void)removeViewsToHideForSimplify:(NSArray*)viewsToHide
+{
+    for (UIView *view in viewsToHide) {
+        [self.elementsToHideDuringSimplify removeObject:[WeakReference weakReferenceWithObject:view]];
+    }
+}
+
+- (void)setViewsToHideForSimplify:(NSArray*)viewsToHide
+{
+    [self removeAllViewsToHideForSimplify];
+    [self addViewsToHideForSimplify:viewsToHide];
+}
+
+- (void)removeAllViewsToHideForSimplify
+{
+    [self.elementsToHideDuringSimplify removeAllObjects];
+}
+
+
+- (void)simplifyView
+{
+    if (self.shouldSimplifyViewOnScroll && !self.isSimplifying) {
+        self.isSimplifying = YES;
+        self.isCurrentlySimplified = YES;
+        for (WeakReference *weakView in self.elementsToHideDuringSimplify) {
+            CGFloat originalAlpha = [(UIView*)weakView.originalObjectValue alpha];
+            
+            [UIView animateWithDuration:.3 animations:^{
+                [(UIView*)weakView.originalObjectValue setAlpha:.0];
+            } completion:^(BOOL finished) {
+                self.isSimplifying = NO;
+                [(UIView*)weakView.originalObjectValue setHidden:YES];
+                [(UIView*)weakView.originalObjectValue setAlpha:originalAlpha];
+            }];
+        }
+
+}
+}
+
+- (void)unsimplifyView
+{
+    if (!self.isUnsimplifying && self.isCurrentlySimplified) {
+        self.isCurrentlySimplified = NO;
+        [UIView animateWithDuration:.3 animations:^{
+            self.isUnsimplifying = YES;
+            for (WeakReference *weakView in self.elementsToHideDuringSimplify) {
+                CGFloat originalAlpha = [(UIView*)weakView.originalObjectValue alpha];
+                [(UIView*)weakView.originalObjectValue setAlpha:.0];
+                [(UIView*)weakView.originalObjectValue setHidden:NO];
+                
+                [UIView animateWithDuration:.3 animations:^{
+                    [(UIView*)weakView.originalObjectValue setAlpha:originalAlpha];
+                } completion:^(BOOL finished) {
+                    self.isUnsimplifying = NO;
+                }];
+            }
+        }];
+    }else if (!self.isUnsimplifying && !self.isCurrentlySimplified){
+        [self simplifyView];
     }
 }
 

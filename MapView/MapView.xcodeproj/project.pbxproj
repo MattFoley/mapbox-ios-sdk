@@ -46,6 +46,8 @@
 		23A0AAEB0EB90AA6003A4521 /* RMFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A0AAEA0EB90AA6003A4521 /* RMFoundation.h */; };
 		25757F4F1291C8640083D504 /* RMCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 25757F4D1291C8640083D504 /* RMCircle.h */; };
 		25757F501291C8640083D504 /* RMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25757F4E1291C8640083D504 /* RMCircle.m */; };
+		370982FD16CC817D0091F80D /* WeakReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 370982FB16CC817D0091F80D /* WeakReference.h */; };
+		370982FE16CC817D0091F80D /* WeakReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 370982FC16CC817D0091F80D /* WeakReference.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		373A0A9116B246DF001898A9 /* RMDynamicMinecraftSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 373A0A8F16B246DF001898A9 /* RMDynamicMinecraftSource.h */; };
 		373A0A9216B246DF001898A9 /* RMDynamicMinecraftSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 373A0A9016B246DF001898A9 /* RMDynamicMinecraftSource.m */; };
 		96492C400FA8AD3400EBA6D2 /* RMGlobalConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 96492C3F0FA8AD3400EBA6D2 /* RMGlobalConstants.h */; };
@@ -202,6 +204,8 @@
 		25757F4E1291C8640083D504 /* RMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCircle.m; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* MapView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		370982FB16CC817D0091F80D /* WeakReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeakReference.h; path = Categories/WeakReference.h; sourceTree = "<group>"; };
+		370982FC16CC817D0091F80D /* WeakReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeakReference.m; path = Categories/WeakReference.m; sourceTree = "<group>"; };
 		373A0A8F16B246DF001898A9 /* RMDynamicMinecraftSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDynamicMinecraftSource.h; sourceTree = "<group>"; };
 		373A0A9016B246DF001898A9 /* RMDynamicMinecraftSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDynamicMinecraftSource.m; sourceTree = "<group>"; };
 		96492C3F0FA8AD3400EBA6D2 /* RMGlobalConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMGlobalConstants.h; sourceTree = "<group>"; };
@@ -397,6 +401,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		370982FA16CC81630091F80D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				370982FB16CC817D0091F80D /* WeakReference.h */,
+				370982FC16CC817D0091F80D /* WeakReference.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		B83E64CE0E80E73F001663B6 /* Tile & Overlay Rendering */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +519,7 @@
 		B8C9740D0E8A196E007D16AD /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				370982FA16CC81630091F80D /* Categories */,
 				DD4BE197161CE296003EF677 /* MapBox.h */,
 				B8C974690E8A1A50007D16AD /* RMMapView.h */,
 				B8C9746A0E8A1A50007D16AD /* RMMapView.m */,
@@ -705,6 +719,7 @@
 				DDE357F816522CD8001DB842 /* RMPolygonAnnotation.h in Headers */,
 				DD1985C1165C5F6400DF667F /* RMTileMillSource.h in Headers */,
 				373A0A9116B246DF001898A9 /* RMDynamicMinecraftSource.h in Headers */,
+				370982FD16CC817D0091F80D /* WeakReference.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,6 +870,7 @@
 				DDE357F916522CD8001DB842 /* RMPolygonAnnotation.m in Sources */,
 				DD1985C2165C5F6400DF667F /* RMTileMillSource.m in Sources */,
 				373A0A9216B246DF001898A9 /* RMDynamicMinecraftSource.m in Sources */,
+				370982FE16CC817D0091F80D /* WeakReference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
