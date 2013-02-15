@@ -118,6 +118,7 @@
 - (NSURL *)URLForTile:(RMTile)tile
 {
     NSMutableString*urlToReturn = [[NSMutableString alloc]initWithString:self.hostURL];
+    NSLog(@"Enter method %@", urlToReturn);
     
     if (tile.x >= pow(2, tile.zoom) || tile.y >= pow(2, tile.zoom)) {
         [urlToReturn appendFormat:@"/blank"];
@@ -132,14 +133,15 @@
     }
     
     [urlToReturn appendFormat:@".png"];
-    
+    urlToReturn = [urlToReturn stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	return [NSURL URLWithString:urlToReturn];
 }
 
 - (NSArray *)URLsForTile:(RMTile)tile
 {
     NSMutableArray*urls = [@[] mutableCopy];
-    [urls addObject:[self URLForTile:tile]];
+    NSURL *tileUrl = [self URLForTile:tile];
+    [urls addObject:tileUrl];
     
     for (int i = 0; i < self.overlays.count; i++) {
         
