@@ -61,6 +61,8 @@
 #define kDefaultInitialLatitude  38.913175
 #define kDefaultInitialLongitude -77.032458
 
+#define kDefaultAnimationTime 0.6
+
 #define kDefaultMinimumZoomLevel 0.0
 #define kDefaultMaximumZoomLevel 25.0
 #define kDefaultInitialZoomLevel 11.0
@@ -951,7 +953,7 @@
 
 - (void)setZoom:(float)newZoom atCoordinate:(CLLocationCoordinate2D)newCenter animated:(BOOL)animated
 {
-    [UIView animateWithDuration:(animated ? 0.3 : 0.0)
+    [UIView animateWithDuration:(animated ? kDefaultAnimationTime : 0.0)
                           delay:0.0
                         options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseInOut
                      animations:^(void)

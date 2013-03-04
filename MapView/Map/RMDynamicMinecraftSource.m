@@ -118,7 +118,7 @@
 - (NSURL *)URLForTile:(RMTile)tile
 {
     NSMutableString*urlToReturn = [[NSMutableString alloc]initWithString:self.hostURL];
-    NSLog(@"Enter method %@", urlToReturn);
+
     
     if (tile.x >= pow(2, tile.zoom) || tile.y >= pow(2, tile.zoom)) {
         [urlToReturn appendFormat:@"/blank"];
