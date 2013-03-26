@@ -529,10 +529,9 @@
 
                 _cachedClusterAnnotation = [[RMAnnotation alloc] initWithMapView:_mapView
                                                                      coordinate:clusterMarkerCoordinate
-                                                                       andTitle:[NSString stringWithFormat:@"%d", enclosedAnnotationsCount]];
+                                                                       andTitle:[NSString stringWithFormat:@"Cluster Of %lu Markers", (unsigned long)enclosedAnnotationsCount]];
                 _cachedClusterAnnotation.annotationType = kRMClusterAnnotationTypeName;
                 _cachedClusterAnnotation.userInfo = self;
-
                 _cachedClusterEnclosedAnnotations = [[NSArray alloc] initWithArray:enclosedAnnotations];
             }
 

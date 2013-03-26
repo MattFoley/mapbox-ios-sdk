@@ -1546,6 +1546,7 @@
     if (_currentAnnotation && ! [hit isEqual:_currentAnnotation.layer])
     {
         [self deselectAnnotation:_currentAnnotation animated:( ! [hit isKindOfClass:[RMMarker class]])];
+        hit = [_overlayView overlayHitTest:[recognizer locationInView:self]];
     }
 
     if ( ! hit)
