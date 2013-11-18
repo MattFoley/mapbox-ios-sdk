@@ -2121,7 +2121,8 @@
     RMMapTiledLayerView *tileSourceTiledLayerView = [_tiledLayersSuperview.subviews objectAtIndex:index];
 
     tileSourceTiledLayerView.layer.contents = nil;
-    [tileSourceTiledLayerView removeFromSuperview]; [tileSourceTiledLayerView release]; tileSourceTiledLayerView = nil;
+    [tileSourceTiledLayerView removeFromSuperview];
+    tileSourceTiledLayerView = nil;
 
     [self setCenterProjectedPoint:centerPoint animated:NO];
 }
