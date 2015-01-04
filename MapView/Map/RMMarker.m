@@ -147,8 +147,12 @@
     if ((image = [UIImage imageWithData:[NSData dataWithContentsOfFile:cachePath] scale:(useRetina ? 2.0 : 1.0)]) && image)
         return [self initWithUIImage:image];
     
+    NSError *error;
+    [[NSURL URLWithString:cachePath] setResourceValue:[NSNumber numberWithBool: YES]
+                                               forKey:NSURLIsExcludedFromBackupKey error: &error];
     [[NSFileManager defaultManager] createFileAtPath:cachePath contents:[NSData dataWithContentsOfURL:imageURL] attributes:nil];
-    
+    [[NSURL URLWithString:cachePath] setResourceValue:[NSNumber numberWithBool: YES]
+                                               forKey:NSURLIsExcludedFromBackupKey error: &error];
     return [self initWithUIImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:cachePath] scale:(useRetina ? 2.0 : 1.0)]];
 }
 

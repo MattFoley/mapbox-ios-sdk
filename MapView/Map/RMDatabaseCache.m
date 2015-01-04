@@ -66,10 +66,11 @@
 {
 	NSArray *paths;
 
-	if (useCacheDir)
+	if (useCacheDir) {
 		paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	else
-		paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    } else {
+		paths = @[NSTemporaryDirectory()];
+    }
 
 	if ([paths count] > 0) // Should only be one...
 	{
